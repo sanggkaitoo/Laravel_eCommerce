@@ -15,7 +15,7 @@
     </form>
   </div>
   <div class="col">
-    <a href="{{url('admin/user/create')}}" class="btn btn-primary float-right">Thêm mới</a>
+    <a href="{{ route('admin.usermanagement.create') }}" class="btn btn-primary float-right">Thêm mới</a>
   </div>
 </div>
 <hr>
@@ -54,10 +54,10 @@
         @endif
       </td>
       <td class='text-right'>
-        <a href="{{route('admin.usermanagement.edit',$user->id)}}" class="btn btn-sm btn-success">
+        <a href="{{route('admin.usermanagement.edit',$user->id)}}" class="btn btn-sm btn-success" role="button">
           <i class="fas fa-edit"></i>
         </a>
-        <a href="{{route('admin.usermanagement.destroy',$user->id)}}" class="btn btn-sm btn-danger btndelete">
+        <a href="{{route('admin.usermanagement.destroy',$user->id)}}" class="btn btn-sm btn-danger btndelete" role="button">
           <i class="fas fa-trash"></i>
         </a>
       </td>
@@ -66,8 +66,10 @@
   </tbody>
 </table>
 
+{{$data->appends(Request::all())->links()}}
+
 <form action="" method="post" id='form-delete'>
-  @csrf @method('DELETE')
+    @csrf @method('DELETE')
 </form>
 
 {{$data->appends(Request::all())->links()}}
@@ -80,7 +82,7 @@ $('.btndelete').click(function(ev) {
   ev.preventDefault();
   var _href = $(this).attr('href');
   $('form#form-delete').attr('action', _href);
-  if (confirm('Bạn muốn xóa bản ghi này không?')) {
+  if (confirm('Bạn muốn xóa người dùng này không?')) {
     $('form#form-delete').submit()
   }
 

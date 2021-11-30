@@ -30,7 +30,7 @@ class UserManagementController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.create');
     }
 
     /**
@@ -41,7 +41,50 @@ class UserManagementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request->validate([
+        //     'name'=>'required',
+        //     'user_name'=>'required|unique:users',
+        //     'email'=>'required|email|unique:users',
+        //     'password'=>'required',
+        //     'number_phone'=>'required',
+        //     'avatar'=>'required',
+        //     'status'=>'required',
+        //     'level'=>'required'
+        // ],
+        // [
+            //     'name.required'=>'Yêu cầu nhập họ và tên',
+            //     'user_name.required'=>'Yêu cầu nhập username',
+            //     'user_name.unique'=>'User đã tồn tại',
+            //     'email.required'=>'Yêu cầu nhập Email',
+            //     'email.unique'=>'Email đã tồn tại',
+            //     'password.required'=>'Yêu cầu nhập mật khẩu',
+            //     'number_phone.required'=>'Yêu cầu nhập số điện thoại',
+            //     'avatar.required'=>'Yêu cầu chọn ảnh',
+            //     'level.required'=>'Yêu cầu nhập Level'
+            // ]
+            // );
+
+        // $validate = $request->validate([
+        //     'name'=>'required',
+        //     'user_name'=>'required|unique:users',
+        //     'email'=>'required|email|unique:users',
+        //     'password'=>'required',
+        //     'number_phone'=>'required',
+        //     'avatar'=>'required',
+        //     'status'=>'required',
+        //     'level'=>'required',
+        // ]);
+
+        $temp = $request->password;
+        $password = \Hash::make($temp);
+        $data = $request->all();
+        $data['password'] = $password;
+
+        // dd($request);
+
+        if(User::create($data)){
+            return redirect()->route('admin.usermanagement.index')->with('success', 'Thêm người dùng mới thành công.');
+        }
     }
 
     /**
@@ -63,7 +106,7 @@ class UserManagementController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.user.edit', ['user'=>$user]);
     }
 
     /**
@@ -75,7 +118,9 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        if($user->update($request->all())) {
+            return redirect()->route('admin.usermanagement.index')->with('success','Cập nhật thông tin người dùng thành công.');
+        }
     }
 
     /**
@@ -86,6 +131,7 @@ class UserManagementController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('admin.usermanagement.index')->with('success','Xóa người dùng thành công.');
     }
 }

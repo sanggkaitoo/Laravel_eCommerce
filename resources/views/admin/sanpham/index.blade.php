@@ -45,8 +45,12 @@
                 </td>
                 <td>{{$d->uutien}}</td>
                 <td class="text-right">
-                    <a name="" id="" class="btn btn-sm btn-primary" href="{{route('admin.sanpham.edit', $d->id)}}" role="button"><i class="fa fa-edit"></i></a>
-                    <a name="" id="" class="btn btn-sm btn-danger btndelete" href="{{route('admin.sanpham.destroy',$d->id)}}" role="button"><i class="fa fa-trash"></i> </a>
+                    <a name="" id="" class="btn btn-sm btn-primary" href="{{route('admin.sanpham.edit', $d->id)}}" role="button">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-sm btn-danger btndelete" href="{{route('admin.sanpham.destroy',$d->id)}}" role="button">
+                        <i class="fa fa-trash"></i>
+                    </a>
                 </td>
             </tr>
             @endforeach

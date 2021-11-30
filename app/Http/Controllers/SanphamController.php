@@ -16,6 +16,7 @@ class SanphamController extends Controller
      */
     public function index()
     {
+
         if ($key=request()->key){
             $data = Sanpham::where('ten', 'like', '%'.$key.'%')->orderby('uutien','DESC')->paginate(5);
         }
@@ -46,7 +47,7 @@ class SanphamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ten'=>'required|unique:sanpham',
+            'hoten'=>'required|unique:sanpham',
             'gia'=>'required',
             'uutien'=>'required',
         ],
@@ -161,7 +162,8 @@ class SanphamController extends Controller
      */
     public function destroy(Sanpham $sanpham)
     {
-        $sanpham->delete();
-        return redirect()->route('admin.sanpham.index')->with('success','Xóa bản ghi thành công.');
+        // $sanpham->delete();
+        // return redirect()->route('admin.sanpham.index')->with('success','Xóa bản ghi thành công.');
+        dd($sanpham['id']);
     }
 }

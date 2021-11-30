@@ -180,7 +180,7 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Mạnh Sang</a>
+                        <a href="{{ route('admin.usermanagement.index')}}" class="d-block">Mạnh Sang</a>
                     </div>
                 </div>
 
